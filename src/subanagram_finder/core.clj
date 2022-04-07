@@ -50,20 +50,8 @@
   "
   [words]
   (let [dictionary (load-dictionary)]
-       ;all_anagrams = map(lambda word: find_sub_anagrams(word, dictionary), words)
-      (let [all_anagrams ( map #( (find-sub-anagrams % dictionary) words))]
-        ;'\n'.join(map(lambda anagrams: ' '.join(anagrams), all_anagrams))
-        ;(clojure.string/join "\n" (map #( (clojure.string/join " " %)  all_anagrams) ) )
-        (println "==============")
-        (println "==============")
-        (println "==============")
-        ;;(println (map #( (clojure.string/join " " %) ) all_anagrams ) )
-        (println
-          (map (fn [anagrams] (clojure.string/join " " anagrams) ) all_anagrams )
-          )
-        (println "==============")
-        (println "==============")
-        (println "==============")
+      (let [all_anagrams ( map #(find-sub-anagrams % dictionary) words)]
+        (clojure.string/join "\n" (map #(clojure.string/join " " %)  all_anagrams) )
       )
     )
   )
