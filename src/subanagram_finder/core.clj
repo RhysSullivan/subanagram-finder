@@ -13,7 +13,7 @@
   "Load list of words from disk."
   ([] (load-dictionary "resources/words"))
   ([file-name]
-   ;; Code goes here
+     (str/split-lines (slurp file-name))
   ))
   
 
@@ -23,6 +23,46 @@
   A sub-anagram means it is an anagram of a substring of word."
   [word, word-list]
   ;; Code goes here
+  (println "=================================")
+  (println "=================================")
+  (println "=================================")
+  (println "=================================")
+  (def word_length (count word))
+  (def letter_counts (frequencies (clojure.string/lower-case word)))
+  
+  (defn is_sub_anagram[other_word]
+    (def other_word_length (count other_word))
+    (
+      if (< word_length other_word_length) ;; TODO: Maybe not?
+        false  ;; True so return false
+        (
+          (def other_letter_counts (frequencies (clojure.string/lower-case other_word)))
+          (def other_letter_keys (keys other_letter_counts))
+          (map
+            (fn [letter] (
+              (
+                >=
+                (get letter_counts letter 0)
+                (get other_letter_counts letter)
+              )
+            )
+            )
+            other_letter_keys
+          )
+          
+
+          true
+        ) 
+    )
+  )
+  
+  (println(filter is_sub_anagram word-list))
+  (println "=================================")
+  (println "=================================")
+  (println "=================================")
+  (println "=================================")
+  (println "=================================")
+  (println "=================================")
 )  
 
 (defn generate-output 
@@ -34,7 +74,8 @@
             \"A At E T Ta a at ate e eat eta t tea\nK O OK k o\"
   "
   [words]
-  ;; Code goes here)
+  ;; Code goes here
+  )
   
 
 (defn -main 
