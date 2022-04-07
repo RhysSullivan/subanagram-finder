@@ -49,7 +49,23 @@
             \"A At E T Ta a at ate e eat eta t tea\nK O OK k o\"
   "
   [words]
-  ;; Code goes here
+  (let [dictionary (load-dictionary)]
+       ;all_anagrams = map(lambda word: find_sub_anagrams(word, dictionary), words)
+      (let [all_anagrams ( map #( (find-sub-anagrams % dictionary) words))]
+        ;'\n'.join(map(lambda anagrams: ' '.join(anagrams), all_anagrams))
+        ;(clojure.string/join "\n" (map #( (clojure.string/join " " %)  all_anagrams) ) )
+        (println "==============")
+        (println "==============")
+        (println "==============")
+        ;;(println (map #( (clojure.string/join " " %) ) all_anagrams ) )
+        (println
+          (map (fn [anagrams] (clojure.string/join " " anagrams) ) all_anagrams )
+          )
+        (println "==============")
+        (println "==============")
+        (println "==============")
+      )
+    )
   )
   
 
