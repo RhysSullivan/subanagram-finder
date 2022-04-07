@@ -38,20 +38,7 @@
         (
           (def other_letter_counts (frequencies (clojure.string/lower-case other_word)))
           (def other_letter_keys (keys other_letter_counts))
-          (map
-            (fn [letter] (
-              (
-                >=
-                (get letter_counts letter 0)
-                (get other_letter_counts letter)
-              )
-            )
-            )
-            other_letter_keys
-          )
-          
-
-          true
+          (every? #(>= (letter_counts % 0) (other_letter_counts %)) other_letter_keys)
         ) 
     )
   )
