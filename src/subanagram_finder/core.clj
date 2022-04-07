@@ -23,34 +23,22 @@
   A sub-anagram means it is an anagram of a substring of word."
   [word, word-list]
   ;; Code goes here
-  (println "=================================")
-  (println "=================================")
-  (println "=================================")
-  (println "=================================")
-  (def word_length (count word))
-  (def letter_counts (frequencies (clojure.string/lower-case word)))
+
+  (let [letter_counts (frequencies (clojure.string/lower-case word))]
   
   (defn is_sub_anagram[other_word]
-    (def other_word_length (count other_word))
     (
-      if (< word_length other_word_length) ;; TODO: Maybe not?
+      if (< (count word) (count other_word)) ;; TODO: Maybe not?
         false  ;; True so return false
-        (
-          (def other_letter_counts (frequencies (clojure.string/lower-case other_word)))
-          (def other_letter_keys (keys other_letter_counts))
-          (every? #(>= (letter_counts % 0) (other_letter_counts %)) other_letter_keys)
-        ) 
+          (let [other_letter_counts (frequencies (clojure.string/lower-case other_word))]
+            (every? identity (map #(>= (letter_counts % 0) (other_letter_counts %)) (keys other_letter_counts) ) )
+            
+          )
     )
   )
-  
-  (println(filter is_sub_anagram word-list))
-  (println "=================================")
-  (println "=================================")
-  (println "=================================")
-  (println "=================================")
-  (println "=================================")
-  (println "=================================")
-)  
+  )
+  (filter is_sub_anagram word-list)
+)    
 
 (defn generate-output 
   "Generate the output.
